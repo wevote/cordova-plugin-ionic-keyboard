@@ -224,6 +224,7 @@ NSString* UITraitsClassString;
     }
     NSLog(@"CDVIonicKeyboard: updating frame");
     // NOTE: to handle split screen correctly, the application's window bounds must be used as opposed to the screen's bounds.
+    // WeVote change from @treetopdevs https://github.com/ionic-team/cordova-plugin-ionic-keyboard/issues/187
     CGRect f = [[[[UIApplication sharedApplication] delegate] window] bounds];
     CGRect wf = self.webView.frame;
     switch (self.keyboardResizes) {
@@ -243,6 +244,9 @@ NSString* UITraitsClassString;
         }
         case ResizeNative:
         {
+            // WeVote Use of undeclared identifier error
+            CGRect f = [[UIScreen mainScreen] bounds]; // or self.view.bounds
+            CGRect wf = self.webView.frame;
             [self.webView setFrame:CGRectMake(wf.origin.x, wf.origin.y, f.size.width - wf.origin.x, f.size.height - wf.origin.y - self.paddingBottom)];
             break;
         }
